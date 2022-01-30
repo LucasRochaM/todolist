@@ -1,0 +1,24 @@
+<%= form_with(model: @todo, local: true) do |form| %>
+  <% if @todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+      <% @todo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+<div class="container d-flex flex-column">
+<span class="h3 text-center">To Do List do Lucão</span>
+  <div class="field">
+    <%= form.text_field :description, autocomplete: 'off', class: 'form-control mr-sm-2' %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit 'Adicionar a Lista', class: 'button mt-2 w-100' %>
+  </div>
+</div>
+<% end %>

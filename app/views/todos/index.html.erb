@@ -1,0 +1,39 @@
+<%=render 'todos/navbar'%>
+
+<p id="notice"><%= notice %></p>
+
+
+<div class="table-responsive">
+  <table class="table table-md table-hover">
+
+    <tbody>
+      <% @todos.each do |todo| %>
+        <tr>
+        <% if todo.completed %>
+          <td class="riscado"><%= link_to todo.description, todo, class: 'h3' %></td>
+          <td>
+            <%= form_for(todo) do |f| %>
+              <%= f.check_box :completed, :checked => false, :style => 'visibility: hidden' %>
+              <%= f.submit 'Não Feito', class: 'button pt-2'%>
+            <% end %>
+          </td>
+          <td><%= link_to 'Editar', edit_todo_path(todo), class: 'btn btn-outline-primary' %></td>
+          <td><%= link_to 'Deletar', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %></td>
+        <% else %>
+          <td><%= link_to todo.description, todo, class: 'h3' %></td>
+            <td>
+            <%= form_for(todo) do |f| %>
+              <%= f.check_box :completed, :checked => true, :style => 'visibility: hidden' %>
+              <%= f.submit 'Feito', class: 'button pt-2'%>
+            <% end %>
+          </td>
+          <td><%= link_to 'Editar', edit_todo_path(todo), class: 'btn btn-outline-primary' %></td>
+          <td><%= link_to 'Deletar', todo, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-outline-danger' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<br>
